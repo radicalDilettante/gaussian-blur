@@ -1,8 +1,8 @@
 const utils = new WebGLUtils();
-const canvas = document.getElementById("canvas");
-canvas.width = 800;
-canvas.height = 600;
-const gl = utils.getGLContext(canvas);
+const canvasWebgl = document.getElementById("canvas_webgl");
+canvasWebgl.width = 800;
+canvasWebgl.height = 600;
+const gl = utils.getGLContext(canvasWebgl);
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -100,11 +100,11 @@ const getCoords = () => {
 };
 
 let texture;
-const image = new Image();
+const webglImage = new Image();
 let AR = null;
-image.src = "../auckland.jpg";
-image.onload = () => {
-  AR = utils.getAspectRatio(gl, image);
+webglImage.src = "../assest/auckland.jpg";
+webglImage.onload = () => {
+  AR = utils.getAspectRatio(gl, webglImage);
   const v = getCoords();
   vertices = utils.prepareRectVec2(v.startX, v.startY, v.endX, v.endY);
   buffer = utils.createAndBindBuffer(
@@ -112,7 +112,7 @@ image.onload = () => {
     gl.STATIC_DRAW,
     new Float32Array(vertices)
   );
-  texture = utils.createAndBindTexture(gl, image);
+  texture = utils.createAndBindTexture(gl, webglImage);
   render();
 };
 gl.useProgram(program);
@@ -150,10 +150,11 @@ const getDiff = (startX, startY, endX, endY) => {
   };
 };
 
-const reset = document.getElementById("reset");
-const kernel = document.getElementById("kernel");
+const webglReset = document.getElementById("reset_webgl");
+const webglBlur = document.getElementById("blur_webgl");
+const webglResult = document.getElementById("result_webgl");
 const isKernel = gl.getUniformLocation(program, "isKernel");
-kernel.onclick = () => {
+webglBlur.onclick = () => {
   const v1 = performance.now();
   gl.uniform1f(isKernel, 1.0);
   const kernelWeight = gl.getUniformLocation(program, "kernelWeight");
@@ -165,9 +166,10 @@ kernel.onclick = () => {
   gl.uniform1fv(ker, kernels.edgeEnhancement);
   render();
   const v2 = performance.now();
-  console.log(v2 - v1);
+  webglResult.innerHTML = `It takes ${v2 - v1}ms`;
 };
-reset.onclick = () => {
+webglReset.onclick = () => {
   gl.uniform1f(isKernel, 0.0);
   render();
+  webglResult.innerHTML = "";
 };

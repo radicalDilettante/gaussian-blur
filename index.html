@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <h1 style="padding: 20px 0 0 20px">Gaussian Blur</h1>
+    <div
+      style="display: flex; flex-direction: row; width: 800px; margin: 0 10px"
+    >
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          width: 800px;
+          margin: 0 10px;
+        "
+      >
+        <h2>Canvas 2D</h2>
+        <div style="margin-bottom: 10px">
+          <button id="blur_canvas">Blur</button>
+          <button id="reset_canvas">Reset</button>
+          <span id="result_canvas"></span>
+        </div>
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          width: 800px;
+          margin: 0 10px;
+        "
+      >
+        <h2>Webgl</h2>
+        <div style="margin-bottom: 10px">
+          <button id="blur_webgl">Blur</button>
+          <button id="reset_webgl">Reset</button>
+          <span id="result_webgl"></span>
+        </div>
+        <canvas id="canvas_webgl"></canvas>
+      </div>
+    </div>
+  </body>
+  <script src="src/util.js"></script>
+  <script src="src/webgl.js"></script>
+  <script src="src/canvas.js"></script>
+</html>

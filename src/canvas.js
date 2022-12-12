@@ -1,22 +1,23 @@
 const canvas = document.getElementById("canvas");
-let imageData, ctx;
+let ctx;
 const image = new Image();
-image.src = "../auckland.jpg";
+image.src = "../assest/auckland.jpg";
 image.onload = () => {
   const width = 800;
   const height = 600;
   canvas.width = width;
   canvas.height = height;
-  canvas.style.height = height * 0.9 + "px";
   ctx = canvas.getContext("2d");
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-  imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 };
 
-const blur = document.getElementById("blur");
-const reset = document.getElementById("reset");
+const blur = document.getElementById("blur_canvas");
+const reset = document.getElementById("reset_canvas");
+const result = document.getElementById("result_canvas");
 
 blur.onclick = () => {
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const v1 = performance.now();
   const data = imageData.data;
   for (let i = 0; i < canvas.height * 4; i = i + 4) {
@@ -79,9 +80,10 @@ blur.onclick = () => {
 
   ctx.putImageData(imageData, 0, 0);
   const v2 = performance.now();
-  console.log(v2 - v1);
+  result.innerHTML = `It takes ${v2 - v1}ms`;
 };
 
 reset.onclick = () => {
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  result.innerHTML = "";
 };
