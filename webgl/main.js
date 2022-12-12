@@ -41,7 +41,7 @@ out vec4 color;
 uniform bool isKernel;
 vec4 applyKernel () {
     ivec2 dims = textureSize(uImage, 0);
-    vec2 pixelJumpFactor = 1.0/vec2(dims);
+    vec2 pixelJumpFactor = 2.0/vec2(dims);
     vec4 values =
     texture(uImage, textureCoords + pixelJumpFactor * vec2(-1, -1)) * uKernel[0] +
     texture(uImage, textureCoords + pixelJumpFactor * vec2(0, -1)) * uKernel[1] + 
