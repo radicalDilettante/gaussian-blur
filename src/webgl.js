@@ -102,7 +102,7 @@ const getCoords = () => {
 let texture;
 const webglImage = new Image();
 let AR = null;
-webglImage.src = "../assest/auckland.jpg";
+webglImage.src = "assest/auckland.jpg";
 webglImage.onload = () => {
   AR = utils.getAspectRatio(gl, webglImage);
   const v = getCoords();

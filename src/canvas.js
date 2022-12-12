@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 let ctx;
 const image = new Image();
-image.src = "../assest/auckland.jpg";
+image.src = "assest/auckland.jpg";
 image.onload = () => {
   const width = 800;
   const height = 600;
